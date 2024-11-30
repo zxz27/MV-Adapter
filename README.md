@@ -61,6 +61,8 @@ pip install -r requirements.txt
 python -m scripts.gradio_demo_t2mv --base_model "stabilityai/stable-diffusion-xl-base-1.0"
 ```
 
+![demo_t2mv_1](assets/doc/demo_t2mv_1.png)
+
 ![demo_t2mv_2](assets/doc/demo_t2mv_2.png)
 
 > Reminder: When switching the demo to another base model, delete the `gradio_cached_examples` directory, otherwise it will affect the examples results of the next demo.
@@ -72,6 +74,8 @@ python -m scripts.gradio_demo_t2mv --base_model "cagliostrolab/animagine-xl-3.1"
 ```
 
 ![demo_t2mv_anime_1](assets/doc/demo_t2mv_anime_1.png)
+
+![demo_t2mv_anime_2](assets/doc/demo_t2mv_anime_2.png)
 
 ### Image to Multiview Generation
 
