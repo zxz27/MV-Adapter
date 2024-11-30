@@ -87,6 +87,8 @@ python -m scripts.gradio_demo_i2mv
 
 ![demo_i2mv_1](assets/doc/demo_i2mv_1.png)
 
+![demo_i2mv_2](assets/doc/demo_i2mv_2.png)
+
 ## Inference Scripts
 
 We recommend that experienced users check the files in the scripts directory to adjust the parameters appropriately to try the best "card drawing" results.

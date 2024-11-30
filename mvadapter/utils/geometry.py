@@ -1,9 +1,7 @@
-from typing import List
+from typing import List, Optional, Tuple
 
 import numpy as np
 import torch
-from pytorch3d.renderer import NDCMultinomialRaysampler, ray_bundle_to_ray_points
-from pytorch3d.utils import cameras_from_opencv_projection
 from torch.nn import functional as F
 
 
@@ -138,65 +136,89 @@ def get_opencv_from_blender(matrix_world, fov=None, image_size=None):
     return R, T, opencv_cam_matrix
 
 
-def compute_plucker_embed(camera, image_width, image_height):
-    """Computes Plucker coordinates for a Pytorch3D camera."""
+def get_ray_directions(
+    H: int,
+    W: int,
+    focal: float,
+    principal: Optional[Tuple[float, float]] = None,
+    use_pixel_centers: bool = True,
+) -> torch.Tensor:
+    """
+    Get ray directions for all pixels in camera coordinate.
+    Args:
+        H, W, focal, principal, use_pixel_centers: image height, width, focal length, principal point and whether use pixel centers
+    Outputs:
+        directions: (H, W, 3), the direction of the rays in camera coordinate
+    """
+    pixel_center = 0.5 if use_pixel_centers else 0
+    cx, cy = W / 2, H / 2 if principal is None else principal
+    i, j = torch.meshgrid(
+        torch.arange(W, dtype=torch.float32) + pixel_center,
+        torch.arange(H, dtype=torch.float32) + pixel_center,
+        indexing="xy",
+    )
+    directions = torch.stack(
+        [(i - cx) / focal, -(j - cy) / focal, -torch.ones_like(i)], -1
+    )
+    return F.normalize(directions, dim=-1)
 
-    # get camera center
-    cam_pos = camera.get_camera_center()
 
-    # get ray bundle
-    src_ray_bundle = NDCMultinomialRaysampler(
-        image_width=image_width,
-        image_height=image_height,
-        n_pts_per_ray=1,
-        min_depth=1.0,
-        max_depth=1.0,
-    )(camera)
-    ray_dirs = F.normalize(src_ray_bundle.directions, dim=-1)
-    cross = torch.cross(cam_pos[:, None, None, :], ray_dirs, dim=-1)
-    plucker = torch.cat((ray_dirs, cross), dim=-1)
-    plucker = plucker.permute(0, 3, 1, 2)
+def get_rays(
+    directions: torch.Tensor, c2w: torch.Tensor
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """
+    Get ray origins and directions from camera coordinates to world coordinates
+    Args:
+        directions: (H, W, 3) ray directions in camera coordinates
+        c2w: (4, 4) camera-to-world transformation matrix
+    Outputs:
+        rays_o, rays_d: (H, W, 3) ray origins and directions in world coordinates
+    """
+    # Rotate ray directions from camera coordinate to the world coordinate
+    rays_d = directions @ c2w[:3, :3].T
+    rays_o = c2w[:3, 3].expand(rays_d.shape)
+    return rays_o, rays_d
 
-    return plucker  # (B, 6, H, W)
+
+def compute_plucker_embed(
+    c2w: torch.Tensor, image_width: int, image_height: int, focal: float
+) -> torch.Tensor:
+    """
+    Computes Plucker coordinates for a camera.
+    Args:
+        c2w: (4, 4) camera-to-world transformation matrix
+        image_width: Image width
+        image_height: Image height
+        focal: Focal length of the camera
+    Returns:
+        plucker: (6, H, W) Plucker embedding
+    """
+    directions = get_ray_directions(image_height, image_width, focal)
+    rays_o, rays_d = get_rays(directions, c2w)
+    # Cross product to get Plucker coordinates
+    cross = torch.cross(rays_o, rays_d, dim=-1)
+    plucker = torch.cat((rays_d, cross), dim=-1)
+    return plucker.permute(2, 0, 1)
 
 
 def get_plucker_embeds_from_cameras(
     c2w: List[torch.Tensor], fov: List[float], image_size: int
-):
+) -> torch.Tensor:
     """
     Given lists of camera transformations and fov, returns the batched plucker embeddings.
-
-    Parameters:
+    Args:
         c2w: list of camera-to-world transformation matrices
         fov: list of field of view values
         image_size: size of the image
-
     Returns:
-        plucker_embeds: plucker embeddings (B, 6, H, W)
+        plucker_embeds: (B, 6, H, W) batched plucker embeddings
     """
     plucker_embeds = []
-    # compute pairwise mask and plucker embeddings
     for cam_matrix, cam_fov in zip(c2w, fov):
-        # get pytorch3d frames (blender to opencv, then opencv to pytorch3d)
-        R, T, intrinsics = get_opencv_from_blender(cam_matrix, cam_fov, image_size)
-        camera_pytorch3d = cameras_from_opencv_projection(
-            R,
-            T,
-            intrinsics,
-            torch.tensor([image_size, image_size])
-            .float()
-            .unsqueeze(0)
-            .to(cam_matrix.device),
-        )
-
-        plucker = compute_plucker_embed(
-            camera_pytorch3d, image_size, image_size
-        ).squeeze()
+        focal = 0.5 * image_size / np.tan(0.5 * cam_fov)
+        plucker = compute_plucker_embed(cam_matrix, image_size, image_size, focal)
         plucker_embeds.append(plucker)
-
-    plucker_embeds = torch.stack(plucker_embeds)
-
-    return plucker_embeds
+    return torch.stack(plucker_embeds)
 
 
 def get_plucker_embeds_from_cameras_ortho(
@@ -216,7 +238,7 @@ def get_plucker_embeds_from_cameras_ortho(
     plucker_embeds = []
     # compute pairwise mask and plucker embeddings
     for cam_matrix, scale in zip(c2w, ortho_scale):
-        # get pytorch3d frames (blender to opencv, then opencv to pytorch3d)
+        # blender to opencv to pytorch3d
         R, T = get_opencv_from_blender(cam_matrix)
         cam_pos = -R.T @ T
         view_dir = R.T @ torch.tensor([0, 0, 1]).float().to(cam_matrix.device)
