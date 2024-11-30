@@ -92,7 +92,9 @@ We recommend that experienced users check the files in the scripts directory to 
 **With SDXL:**
 
 ```Bash
-python -m scripts.inference_t2mv_sdxl --text "an astronaut riding a horse" --seed 42 --output output.png
+python -m scripts.inference_t2mv_sdxl --text "an astronaut riding a horse" \
+--seed 42 \
+--output output.png
 ```
 
 **With personalized models:**
@@ -100,25 +102,41 @@ python -m scripts.inference_t2mv_sdxl --text "an astronaut riding a horse" --see
 anime-themed <a href="https://huggingface.co/cagliostrolab/animagine-xl-3.1" target="_blank">Animagine XL 3.1</a>
 
 ```Bash
-python -m scripts.inference_t2mv_sdxl --base_model "cagliostrolab/animagine-xl-3.1" --text "1girl, izayoi sakuya, touhou, solo, maid headdress, maid, apron, short sleeves, dress, closed mouth, white apron, serious face, upper body, masterpiece, best quality, very aesthetic, absurdres" --seed 0 --output output.png
+python -m scripts.inference_t2mv_sdxl --base_model "cagliostrolab/animagine-xl-3.1" \
+--text "1girl, izayoi sakuya, touhou, solo, maid headdress, maid, apron, short sleeves, dress, closed mouth, white apron, serious face, upper body, masterpiece, best quality, very aesthetic, absurdres" \
+--seed 0 \
+--output output.png
 ```
 
 general <a href="https://huggingface.co/Lykon/dreamshaper-xl-1-0" target="_blank">Dreamshaper</a>
 
 ```Bash
-python -m scripts.inference_t2mv_sdxl --base_model "Lykon/dreamshaper-xl-1-0" --scheduler ddpm --text "the warrior Aragorn from Lord of the Rings, film grain, 8k hd" --seed 0 --output output.png
+python -m scripts.inference_t2mv_sdxl --base_model "Lykon/dreamshaper-xl-1-0" \
+--scheduler ddpm \
+--text "the warrior Aragorn from Lord of the Rings, film grain, 8k hd" \
+--seed 0 \
+--output output.png
 ```
 
 realistic <a href="https://huggingface.co/stablediffusionapi/real-dream-sdxl" target="_blank">real-dream-sdxl</a>
 
 ```Bash
-python -m scripts.inference_t2mv_sdxl --base_model "stablediffusionapi/real-dream-sdxl" --scheduler ddpm --text "macro shot, parrot, colorful, dark shot, film grain, extremely detailed" --seed 42 --output output.png
+python -m scripts.inference_t2mv_sdxl --base_model "stablediffusionapi/real-dream-sdxl" \
+--scheduler ddpm \
+--text "macro shot, parrot, colorful, dark shot, film grain, extremely detailed" \
+--seed 42 \
+--output output.png
 ```
 
 **With <a href="https://huggingface.co/latent-consistency/lcm-sdxl" target="_blank">LCM</a>:**
 
 ```Bash
-python -m scripts.inference_t2mv_sdxl --unet_model "latent-consistency/lcm-sdxl" --scheduler lcm --text "Samurai koala bear" --num_inference_steps 8 --seed 42 --output output.png
+python -m scripts.inference_t2mv_sdxl --unet_model "latent-consistency/lcm-sdxl" \
+--scheduler lcm \
+--text "Samurai koala bear" \
+--num_inference_steps 8 \
+--seed 42 \
+--output output.png
 ```
 
 **With LoRA:**
@@ -126,7 +144,11 @@ python -m scripts.inference_t2mv_sdxl --unet_model "latent-consistency/lcm-sdxl"
 stylized lora <a href="https://huggingface.co/goofyai/3d_render_style_xl" target="_blank">3d_render_style_xl</a>
 
 ```Bash
-python -m scripts.inference_t2mv_sdxl --lora_model "goofyai/3d_render_style_xl/3d_render_style_xl.safetensors" --text "3d style, a fox with flowers around it" --seed 20 --lora_scale 1.0 --output output.png
+python -m scripts.inference_t2mv_sdxl --lora_model "goofyai/3d_render_style_xl/3d_render_style_xl.safetensors" \
+--text "3d style, a fox with flowers around it" \
+--seed 20 \
+--lora_scale 1.0 \
+--output output.png
 ```
 
 **With ControlNet:**
@@ -135,7 +157,9 @@ Scribble to Multiview with <a href="https://huggingface.co/xinsir/controlnet-scr
 
 ```Bash
 python -m scripts.inference_scribble2mv_sdxl --text "A 3D model of Finn the Human from the animated television series Adventure Time. He is wearing his iconic blue shirt and green backpack and has a neutral expression on his face. He is standing in a relaxed pose with his left foot slightly forward and his right foot back. His arms are at his sides and his head is turned slightly to the right. The model is made up of simple shapes and has a stylized, cartoon-like appearance. It is textured to resemble the character's appearance in the show." \
---seed 0 --output output.png --guidance_scale 5.0 \
+--seed 0 \
+--output output.png \
+--guidance_scale 5.0 \
 --controlnet_images "assets/demo/scribble2mv/color_0000.webp" "assets/demo/scribble2mv/color_0001.webp" "assets/demo/scribble2mv/color_0002.webp" "assets/demo/scribble2mv/color_0003.webp" "assets/demo/scribble2mv/color_0004.webp" "assets/demo/scribble2mv/color_0005.webp" \
 --controlnet_conditioning_scale 0.7
 ```
@@ -145,13 +169,22 @@ python -m scripts.inference_scribble2mv_sdxl --text "A 3D model of Finn the Huma
 **With SDXL:**
 
 ```Bash
-python -m scripts.inference_i2mv_sdxl --image assets/demo/i2mv/A_decorative_figurine_of_a_young_anime-style_girl.png --text "A decorative figurine of a young anime-style girl" --seed 21 --output output.png --remove_bg
+python -m scripts.inference_i2mv_sdxl \
+--image assets/demo/i2mv/A_decorative_figurine_of_a_young_anime-style_girl.png \
+--text "A decorative figurine of a young anime-style girl" \
+--seed 21 --output output.png --remove_bg
 ```
 
 **With LCM:**
 
 ```Bash
-python -m scripts.inference_i2mv_sdxl --unet_model "latent-consistency/lcm-sdxl" --scheduler lcm --image assets/demo/i2mv/A_juvenile_emperor_penguin_chick.png --text "A juvenile emperor penguin chick" --num_inference_steps 8 --seed 0 --output output.png --remove_bg
+python -m scripts.inference_i2mv_sdxl \
+--unet_model "latent-consistency/lcm-sdxl" \
+--scheduler lcm \
+--image assets/demo/i2mv/A_juvenile_emperor_penguin_chick.png \
+--text "A juvenile emperor penguin chick" \
+--num_inference_steps 8 \
+--seed 0 --output output.png --remove_bg
 ```
 
 ## Citation
