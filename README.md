@@ -7,22 +7,23 @@
 MV-Adapter is a **versatile plug-and-play adapter** that adapt T2I models and their derivatives to multi-view generators.
 
 Highlight Features: Generate multi-view images
-✅ with 768 Resolution using SDXL
-✅ using personalized models (e.g. <a href="https://civitai.com/models/112902/dreamshaper-xl" target="_blank">DreamShaper</a>), distilled models (e.g. <a href="https://huggingface.co/docs/diffusers/api/pipelines/latent_consistency_models" target="_blank">LCM</a>), or extensions (e.g. <a href="https://github.com/lllyasviel/ControlNet" target="_blank">ControlNet</a>)
-✅ from text or image condition
-✅ can be guided by geometry for texture generation
+
+- with 768 Resolution using SDXL
+- using personalized models (e.g. <a href="https://civitai.com/models/112902/dreamshaper-xl" target="_blank">DreamShaper</a>), distilled models (e.g. <a href="https://huggingface.co/docs/diffusers/api/pipelines/latent_consistency_models" target="_blank">LCM</a>), or extensions (e.g. <a href="https://github.com/lllyasviel/ControlNet" target="_blank">ControlNet</a>)
+- from text or image condition
+- can be guided by geometry for texture generation
 
 ## Model Zoo
 
 No need to download manually. Running the scripts will download model weights automatically.
 
-| Model | Condition | Guidance | Base Model | HF weights |
-| :-: | :-: | :-: | :-: | :-: |
-| T2MV | Text | View | SDXL | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |
-| I2MV | Image | View | SDXL | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |
-| TG2MV | Text | Geometry | SDXL |  |
-| IG2MV | Image | Geometry | SDXL |  |
-| Arbitrary Views | Image | View | SDXL |  |
+| Model | Base Model | HF weights |
+| :-: | :-: | :-: |
+| Text-to-Multiview | SDXL | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |
+| Image-to-Multiview | SDXL | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |
+| Text-Geometry-to-Multiview | SDXL |  |
+| Image-Geometry-to-Multiview | SDXL |  |
+| Image-to-Arbitrary-Views | SDXL |  |
 
 ## Installation
 
