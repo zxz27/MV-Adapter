@@ -1,6 +1,6 @@
 # MV-Adapter: Multi-view Consistent Image Generation Made Easy🚀
 
-## 🏠 <a href="https://huanngzh.github.io/MV-Adapter-Page/" target="_blank">Project Page</a> | <a href="" target="_blank">Paper</a> | <a href="" target="_blank">Demo</a>
+## 🏠 <a href="https://huanngzh.github.io/MV-Adapter-Page/" target="_blank">Project Page</a> | <a href="" target="_blank">Paper</a> | [Demo](#model-zoo--demos)
 
 ![teaser](assets/doc/teaser.jpg)
 
@@ -13,17 +13,17 @@ Highlight Features: Generate multi-view images
 - from text or image condition
 - can be guided by geometry for texture generation
 
-## Model Zoo
+## Model Zoo & Demos
 
 No need to download manually. Running the scripts will download model weights automatically.
 
-| Model | Base Model | HF weights |
-| :-: | :-: | :-: |
-| Text-to-Multiview | SDXL | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |
-| Image-to-Multiview | SDXL | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |
-| Text-Geometry-to-Multiview | SDXL |  |
-| Image-Geometry-to-Multiview | SDXL |  |
-| Image-to-Arbitrary-Views | SDXL |  |
+| Model | Base Model | HF Weights | Demo Link |
+| :-: | :-: | :-: | :-: |
+| Text-to-Multiview | SDXL | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-T2MV-SDXL) |
+| Image-to-Multiview | SDXL | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-I2MV-SDXL) |
+| Text-Geometry-to-Multiview | SDXL |  |  |
+| Image-Geometry-to-Multiview | SDXL |  |  |
+| Image-to-Arbitrary-Views | SDXL |  |  |
 
 ## Installation
 
