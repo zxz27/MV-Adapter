@@ -77,6 +77,14 @@ python -m scripts.gradio_demo_t2mv --base_model "cagliostrolab/animagine-xl-3.1"
 
 ![demo_t2mv_anime_2](assets/doc/demo_t2mv_anime_2.png)
 
+**With general <a href="https://huggingface.co/Lykon/dreamshaper-xl-1-0" target="_blank">Dreamshaper</a>:**
+
+```Bash
+python -m scripts.gradio_demo_t2mv --base_model "Lykon/dreamshaper-xl-1-0" --scheduler ddpm
+```
+
+![demo_t2mv_dreamshaper_1](assets/doc/demo_t2mv_dreamshaper_1.png)
+
 ### Image to Multiview Generation
 
 **With SDXL:**

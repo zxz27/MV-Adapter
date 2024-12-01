@@ -14,8 +14,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--base_model", type=str, default="stabilityai/stable-diffusion-xl-base-1.0"
 )
+parser.add_argument("--scheduler", type=str, default=None)
 args = parser.parse_args()
 base_model = args.base_model
+scheduler = args.scheduler
 
 # Device and dtype
 dtype = torch.bfloat16
@@ -33,7 +35,7 @@ pipe = prepare_pipeline(
     unet_model=None,
     lora_model=None,
     adapter_path="huanngzh/mv-adapter",
-    scheduler=None,
+    scheduler=scheduler,
     num_views=NUM_VIEWS,
     device=device,
     dtype=dtype,
@@ -85,6 +87,9 @@ examples = {
             "1girl, pink hair, pink shirts, smile, shy, masterpiece, anime",
             0,
         ],
+    ],
+    "Lykon/dreamshaper-xl-1-0": [
+        ["the warrior Aragorn from Lord of the Rings, film grain, 8k hd", 0]
     ],
 }
 
@@ -160,13 +165,14 @@ Generate 768x768 multi-view images using {base_model} <br>
                     value="watermark, ugly, deformed, noisy, blurry, low contrast",
                 )
 
-        gr.Examples(
-            examples=examples[base_model],
-            fn=infer,
-            inputs=[prompt, seed],
-            outputs=[result, seed],
-            cache_examples=True,
-        )
+        if base_model in examples:
+            gr.Examples(
+                examples=examples[base_model],
+                fn=infer,
+                inputs=[prompt, seed],
+                outputs=[result, seed],
+                cache_examples=True,
+            )
 
     gr.on(
         triggers=[run_button.click, prompt.submit],
