@@ -89,7 +89,11 @@ examples = {
         ],
     ],
     "Lykon/dreamshaper-xl-1-0": [
-        ["the warrior Aragorn from Lord of the Rings, film grain, 8k hd", 0]
+        ["the warrior Aragorn from Lord of the Rings, film grain, 8k hd", 0],
+        [
+            "Oil painting, masterpiece, regal, fancy.  A well-dressed dog named Puproy Doggerson III wearing reading glasses types an important letter on a typewriter and enjoys a cup of coffee with the newspaper.",
+            42,
+        ],
     ],
 }
 

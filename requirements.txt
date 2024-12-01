@@ -11,3 +11,6 @@ omegaconf
 trimesh
 einops
 gradio==4.44.1
+timm
+kornia
+scikit-image

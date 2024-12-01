@@ -201,6 +201,18 @@ python -m scripts.inference_i2mv_sdxl \
 --seed 0 --output output.png --remove_bg
 ```
 
+## ComfyUI
+
+Please check <a href="https://github.com/huanngzh/ComfyUI-MVAdapter" target="_blank">ComfyUI-MVAdapter Repo</a> for details.
+
+**Text to Multiview Generation**
+
+![comfyui_t2mv](assets/doc/comfyui_t2mv.png)
+
+**Image to Multiview Generation**
+
+![comfyui_i2mv](assets/doc/comfyui_i2mv.png)
+
 ## Citation
 
 ```
