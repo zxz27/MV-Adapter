@@ -13,17 +13,21 @@ Highlight Features: Generate multi-view images
 - from text or image condition
 - can be guided by geometry for texture generation
 
+## Updates
+
+* [2024-12] Release model weights, gradio demo, inference scripts and comfyui of text-/image- to multi-view generation models.
+
 ## Model Zoo & Demos
 
 No need to download manually. Running the scripts will download model weights automatically.
 
-| Model | Base Model | HF Weights | Demo Link |
-| :-: | :-: | :-: | :-: |
-| Text-to-Multiview | SDXL | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-T2MV-SDXL) |
-| Image-to-Multiview | SDXL | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-I2MV-SDXL) |
-| Text-Geometry-to-Multiview | SDXL |  |  |
-| Image-Geometry-to-Multiview | SDXL |  |  |
-| Image-to-Arbitrary-Views | SDXL |  |  |
+|            Model            | Base Model |                                                         HF Weights                                                         |                             Demo Link                              |
+| :-------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------: |
+|      Text-to-Multiview      |    SDXL    | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-T2MV-SDXL) |
+|     Image-to-Multiview      |    SDXL    | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-I2MV-SDXL) |
+| Text-Geometry-to-Multiview  |    SDXL    |                                                                                                                            |                                                                    |
+| Image-Geometry-to-Multiview |    SDXL    |                                                                                                                            |                                                                    |
+|  Image-to-Arbitrary-Views   |    SDXL    |                                                                                                                            |                                                                    |
 
 ## Installation
 
