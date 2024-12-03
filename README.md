@@ -21,13 +21,13 @@ Highlight Features: Generate multi-view images
 
 No need to download manually. Running the scripts will download model weights automatically.
 
-|            Model            | Base Model |                                                         HF Weights                                                         |                             Demo Link                              |
-| :-------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------: |
-|      Text-to-Multiview      |    SDXL    | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-T2MV-SDXL) |
-|     Image-to-Multiview      |    SDXL    | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-I2MV-SDXL) |
-| Text-Geometry-to-Multiview  |    SDXL    |                                                                                                                            |                                                                    |
-| Image-Geometry-to-Multiview |    SDXL    |                                                                                                                            |                                                                    |
-|  Image-to-Arbitrary-Views   |    SDXL    |                                                                                                                            |                                                                    |
+|            Model            | Base Model |                                                         HF Weights                                                         |                                                                   Demo Link                                                                   |
+| :-------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: |
+|      Text-to-Multiview      |    SDXL    | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [General](https://huggingface.co/spaces/VAST-AI/MV-Adapter-T2MV-SDXL) / [Anime](https://huggingface.co/spaces/huanngzh/MV-Adapter-T2MV-Anime) |
+|     Image-to-Multiview      |    SDXL    | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |                                      [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-I2MV-SDXL)                                       |
+| Text-Geometry-to-Multiview  |    SDXL    |                                                                                                                            |                                                                                                                                               |
+| Image-Geometry-to-Multiview |    SDXL    |                                                                                                                            |                                                                                                                                               |
+|  Image-to-Arbitrary-Views   |    SDXL    |                                                                                                                            |                                                                                                                                               |
 
 ## Installation
 
@@ -89,6 +89,8 @@ python -m scripts.gradio_demo_t2mv --base_model "Lykon/dreamshaper-xl-1-0" --sch
 
 ![demo_t2mv_dreamshaper_1](assets/doc/demo_t2mv_dreamshaper_1.png)
 
+You can also specify a new diffusers-format text-to-image diffusion model using `--base_model`. Note that it should be the model name in huggingface, such as `stabilityai/stable-diffusion-xl-base-1.0`, or a local path refer to a text-to-image pipeline directory. Note that if you specify `latent-consistency/lcm-sdxl` to use latent consistency models, please add `--scheduler lcm` to the command.
+
 ### Image to Multiview Generation
 
 **With SDXL:**
@@ -106,6 +108,8 @@ python -m scripts.gradio_demo_i2mv
 We recommend that experienced users check the files in the scripts directory to adjust the parameters appropriately to try the best "card drawing" results.
 
 ### Text to Multiview Generation
+
+Note that you can specify a diffusers-format text-to-image diffusion model as the base model using `--base_model xxx`. It should be the model name in huggingface, such as `stabilityai/stable-diffusion-xl-base-1.0`, or a local path refer to a text-to-image pipeline directory.
 
 **With SDXL:**
 
