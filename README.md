@@ -1,6 +1,6 @@
 # MV-Adapter: Multi-view Consistent Image Generation Made Easy🚀
 
-## 🏠 <a href="https://huanngzh.github.io/MV-Adapter-Page/" target="_blank">Project Page</a> | <a href="" target="_blank">Paper</a> | [Demo](#model-zoo--demos)
+## 🏠 <a href="https://huanngzh.github.io/MV-Adapter-Page/" target="_blank">Project Page</a> | <a href="https://arxiv.org/abs/2412.03632" target="_blank">Paper</a> | [Demo](#model-zoo--demos)
 
 ![teaser](assets/doc/teaser.jpg)
 
@@ -227,7 +227,7 @@ Please check <a href="https://github.com/huanngzh/ComfyUI-MVAdapter" target="_bl
 @article{huang2024mvadapter,
   title={MV-Adapter: Multi-view Consistent Image Generation Made Easy},
   author={Huang, Zehuan and Guo, Yuanchen and Wang, Haoran and Yi, Ran and Ma, Lizhuang and Cao, Yan-Pei and Sheng, Lu},
-  journal={},
+  journal={arXiv preprint arXiv:2412.03632},
   year={2024}
 }
 ```
