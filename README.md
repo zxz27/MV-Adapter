@@ -55,6 +55,12 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
 ```
 
+## Notes
+
+### System Requirements
+
+In the model zoo of MV-Adapter, running image-to-multiview generation has the highest system requirements, which requires about 14G GPU memory.
+
 ## Launch Demo
 
 ### Text to Multiview Generation
@@ -207,6 +213,33 @@ python -m scripts.inference_i2mv_sdxl \
 --text "A juvenile emperor penguin chick" \
 --num_inference_steps 8 \
 --seed 0 --output output.png --remove_bg
+```
+
+### Text to Texture Generation
+
+**With SDXL:**
+
+```Bash
+python -m scripts.inference_tg2mv_sdxl \
+--mesh assets/demo/tg2mv/ac9d4e4f44f34775ad46878ba8fbfd86.glb \
+--text "Mater, a rusty and beat-up tow truck from the 2006 Disney/Pixar animated film 'Cars', with a rusty brown exterior, big blue eyes."
+```
+
+```Bash
+python -m scripts.inference_tg2mv_sdxl \
+--mesh assets/demo/tg2mv/b5f0f0f33e3644d1ba73576ceb486d42.glb \
+--text "Optimus Prime, a character from Transformers, with blue, red and gray colors, and has a flame-like pattern on the body"
+```
+
+### Image to Texture Generation
+
+**With SDXL:**
+
+```Bash
+python -m scripts.inference_ig2mv_sdxl \
+--image assets/demo/ig2mv/1ccd5c1563ea4f5fb8152eac59dabd5c.jpeg \
+--mesh assets/demo/ig2mv/1ccd5c1563ea4f5fb8152eac59dabd5c.glb \
+--output output.png --remove_bg
 ```
 
 ## ComfyUI
