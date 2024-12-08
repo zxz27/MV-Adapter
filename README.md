@@ -1,6 +1,6 @@
 # MV-Adapter: Multi-view Consistent Image Generation Made Easy🚀
 
-## 🏠 <a href="https://huanngzh.github.io/MV-Adapter-Page/" target="_blank">Project Page</a> | <a href="https://arxiv.org/abs/2412.03632" target="_blank">Paper</a> | [Demo](#model-zoo--demos)
+## 🏠 <a href="https://huanngzh.github.io/MV-Adapter-Page/" target="_blank">Project Page</a> | <a href="https://arxiv.org/abs/2412.03632" target="_blank">Paper</a> | <a href="https://huggingface.co/huanngzh/mv-adapter" target="_blank">Model Weights</a> | [Demo](#model-zoo--demos)
 
 ![teaser](assets/doc/teaser.jpg)
 
