@@ -250,6 +250,10 @@ Please check <a href="https://github.com/huanngzh/ComfyUI-MVAdapter" target="_bl
 
 ![comfyui_t2mv](assets/doc/comfyui_t2mv.png)
 
+**Text to Multiview Generation with LoRA**
+
+![comfyui_t2mv_lora](assets/doc/comfyui_t2mv_lora.png)
+
 **Image to Multiview Generation**
 
 ![comfyui_i2mv](assets/doc/comfyui_i2mv.png)
