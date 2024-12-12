@@ -21,9 +21,13 @@ Highlight Features: Generate multi-view images
 
 No need to download manually. Running the scripts will download model weights automatically.
 
+Notes: Running MV-Adapter for SDXL may need higher GPU memory and more time, but produce higher-quality and higher-resolution results. On the other hand, running its SD2.1 variant needs lower computing cost, but shows a bit lower performance.
+
 |            Model            | Base Model |                                                         HF Weights                                                         |                                                                   Demo Link                                                                   |
 | :-------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: |
+|      Text-to-Multiview      |    SD2.1    | [mvadapter_t2mv_sd21.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sd21.safetensors) |  |
 |      Text-to-Multiview      |    SDXL    | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [General](https://huggingface.co/spaces/VAST-AI/MV-Adapter-T2MV-SDXL) / [Anime](https://huggingface.co/spaces/huanngzh/MV-Adapter-T2MV-Anime) |
+|     Image-to-Multiview      |    SD2.1    | [mvadapter_i2mv_sd21.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_i2mv_sd21.safetensors) |      |
 |     Image-to-Multiview      |    SDXL    | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |                                      [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-I2MV-SDXL)                                       |
 | Text-Geometry-to-Multiview  |    SDXL    |                                                                                                                            |                                                                                                                                               |
 | Image-Geometry-to-Multiview |    SDXL    |                                                                                                                            |                                                                                                                                               |
