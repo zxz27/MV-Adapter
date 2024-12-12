@@ -192,6 +192,17 @@ python -m scripts.inference_scribble2mv_sdxl --text "A 3D model of Finn the Huma
 --controlnet_conditioning_scale 0.7
 ```
 
+**With SD2.1:**
+
+> SD2.1 has lower demand for computing resources and higher inference speed, but a bit lower performance than SDXL.
+> In our tests, ddpm scheduler works better than other schedulers here.
+
+```Bash
+python -m scripts.inference_t2mv_sd --text "a corgi puppy" \
+--seed 42 --scheduler ddpm \
+--output output.png
+```
+
 ### Image to Multiview Generation
 
 **With SDXL:**
@@ -213,6 +224,17 @@ python -m scripts.inference_i2mv_sdxl \
 --text "A juvenile emperor penguin chick" \
 --num_inference_steps 8 \
 --seed 0 --output output.png --remove_bg
+```
+
+**With SD2.1:** (lower demand for computing resources and higher inference speed)
+
+> In our tests, ddpm scheduler works better than other schedulers here.
+
+```Bash
+python -m scripts.inference_i2mv_sd \
+--image assets/demo/i2mv/A_decorative_figurine_of_a_young_anime-style_girl.png \
+--text "A decorative figurine of a young anime-style girl" \
+--output output.png --remove_bg --scheduler ddpm
 ```
 
 ### Text to Texture Generation
