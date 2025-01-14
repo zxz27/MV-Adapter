@@ -718,7 +718,7 @@ class MVAdapterT2MVSDXLPipeline(StableDiffusionXLPipeline, CustomAdapterMixin):
     def _init_custom_adapter(
         self,
         # Multi-view adapter
-        num_views: int,
+        num_views: int = 1,
         self_attn_processor: Any = DecoupledMVRowSelfAttnProcessor2_0,
         # Condition encoder
         cond_in_channels: int = 6,

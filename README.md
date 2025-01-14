@@ -1,6 +1,6 @@
 # MV-Adapter: Multi-view Consistent Image Generation Made Easy🚀
 
-## 🏠 <a href="https://huanngzh.github.io/MV-Adapter-Page/" target="_blank">Project Page</a> | <a href="https://arxiv.org/abs/2412.03632" target="_blank">Paper</a> | <a href="https://huggingface.co/huanngzh/mv-adapter" target="_blank">Model Weights</a> | [Demo](#model-zoo--demos)
+## 🏠 <a href="https://huanngzh.github.io/MV-Adapter-Page/" target="_blank">Project Page</a> | <a href="https://arxiv.org/abs/2412.03632" target="_blank">Paper</a> | <a href="https://huggingface.co/huanngzh/mv-adapter" target="_blank">Model Weights</a> | [Demo](#model-zoo--demos) | <a href="https://github.com/huanngzh/ComfyUI-MVAdapter" target="_blank">ComfyUI</a>
 
 ![teaser](assets/doc/teaser.jpg)
 
@@ -13,9 +13,20 @@ Highlight Features: Generate multi-view images
 - from text or image condition
 - can be guided by geometry for texture generation
 
-## Updates
+## 🔥 Updates
 
 * [2024-12] Release model weights, gradio demo, inference scripts and comfyui of text-/image- to multi-view generation models.
+
+## TOC
+
+* [Model Zoo & Demos](#model-zoo--demos)
+* [Installation](#installation)
+* [Notes](#notes)
+* [Usage: Multi-view Generation](#usage-multiview-generation)
+  * Option1. [Launch Demo](#launch-demo)
+  * Option2. [Inference Scripts](#inference-scripts)
+  * Option3. [ComfyUI](#comfyui)
+* [Citation](#citation)
 
 ## Model Zoo & Demos
 
@@ -25,9 +36,9 @@ Notes: Running MV-Adapter for SDXL may need higher GPU memory and more time, but
 
 |            Model            | Base Model |                                                         HF Weights                                                         |                                                                   Demo Link                                                                   |
 | :-------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: |
-|      Text-to-Multiview      |    SD2.1    | [mvadapter_t2mv_sd21.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sd21.safetensors) |  |
+|      Text-to-Multiview      |   SD2.1    | [mvadapter_t2mv_sd21.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sd21.safetensors) |                                                                                                                                               |
 |      Text-to-Multiview      |    SDXL    | [mvadapter_t2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) | [General](https://huggingface.co/spaces/VAST-AI/MV-Adapter-T2MV-SDXL) / [Anime](https://huggingface.co/spaces/huanngzh/MV-Adapter-T2MV-Anime) |
-|     Image-to-Multiview      |    SD2.1    | [mvadapter_i2mv_sd21.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_i2mv_sd21.safetensors) |      |
+|     Image-to-Multiview      |   SD2.1    | [mvadapter_i2mv_sd21.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_i2mv_sd21.safetensors) |                                                                                                                                               |
 |     Image-to-Multiview      |    SDXL    | [mvadapter_i2mv_sdxl.safetensors](https://huggingface.co/huanngzh/mv-adapter/resolve/main/mvadapter_t2mv_sdxl.safetensors) |                                      [Demo](https://huggingface.co/spaces/VAST-AI/MV-Adapter-I2MV-SDXL)                                       |
 | Text-Geometry-to-Multiview  |    SDXL    |                                                                                                                            |                                                                                                                                               |
 | Image-Geometry-to-Multiview |    SDXL    |                                                                                                                            |                                                                                                                                               |
@@ -65,9 +76,11 @@ pip install -r requirements.txt
 
 In the model zoo of MV-Adapter, running image-to-multiview generation has the highest system requirements, which requires about 14G GPU memory.
 
-## Launch Demo
+## Usage: Multiview Generation
 
-### Text to Multiview Generation
+### Launch Demo
+
+#### Text to Multiview Generation
 
 **With SDXL:**
 
@@ -101,7 +114,7 @@ python -m scripts.gradio_demo_t2mv --base_model "Lykon/dreamshaper-xl-1-0" --sch
 
 You can also specify a new diffusers-format text-to-image diffusion model using `--base_model`. Note that it should be the model name in huggingface, such as `stabilityai/stable-diffusion-xl-base-1.0`, or a local path refer to a text-to-image pipeline directory. Note that if you specify `latent-consistency/lcm-sdxl` to use latent consistency models, please add `--scheduler lcm` to the command.
 
-### Image to Multiview Generation
+#### Image to Multiview Generation
 
 **With SDXL:**
 
@@ -113,11 +126,11 @@ python -m scripts.gradio_demo_i2mv
 
 ![demo_i2mv_2](assets/doc/demo_i2mv_2.png)
 
-## Inference Scripts
+### Inference Scripts
 
 We recommend that experienced users check the files in the scripts directory to adjust the parameters appropriately to try the best "card drawing" results.
 
-### Text to Multiview Generation
+#### Text to Multiview Generation
 
 Note that you can specify a diffusers-format text-to-image diffusion model as the base model using `--base_model xxx`. It should be the model name in huggingface, such as `stabilityai/stable-diffusion-xl-base-1.0`, or a local path refer to a text-to-image pipeline directory.
 
@@ -207,7 +220,7 @@ python -m scripts.inference_t2mv_sd --text "a corgi puppy" \
 --output output.png
 ```
 
-### Image to Multiview Generation
+#### Image to Multiview Generation
 
 **With SDXL:**
 
@@ -241,34 +254,7 @@ python -m scripts.inference_i2mv_sd \
 --output output.png --remove_bg --scheduler ddpm
 ```
 
-### Text to Texture Generation
-
-**With SDXL:**
-
-```Bash
-python -m scripts.inference_tg2mv_sdxl \
---mesh assets/demo/tg2mv/ac9d4e4f44f34775ad46878ba8fbfd86.glb \
---text "Mater, a rusty and beat-up tow truck from the 2006 Disney/Pixar animated film 'Cars', with a rusty brown exterior, big blue eyes."
-```
-
-```Bash
-python -m scripts.inference_tg2mv_sdxl \
---mesh assets/demo/tg2mv/b5f0f0f33e3644d1ba73576ceb486d42.glb \
---text "Optimus Prime, a character from Transformers, with blue, red and gray colors, and has a flame-like pattern on the body"
-```
-
-### Image to Texture Generation
-
-**With SDXL:**
-
-```Bash
-python -m scripts.inference_ig2mv_sdxl \
---image assets/demo/ig2mv/1ccd5c1563ea4f5fb8152eac59dabd5c.jpeg \
---mesh assets/demo/ig2mv/1ccd5c1563ea4f5fb8152eac59dabd5c.glb \
---output output.png --remove_bg
-```
-
-## ComfyUI
+### ComfyUI
 
 Please check <a href="https://github.com/huanngzh/ComfyUI-MVAdapter" target="_blank">ComfyUI-MVAdapter Repo</a> for details.
 

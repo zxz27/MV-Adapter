@@ -129,16 +129,19 @@ def run_pipeline(
     negative_prompt="watermark, ugly, deformed, noisy, blurry, low contrast",
     lora_scale=1.0,
     device="cuda",
+    azimuth_deg=None,
 ):
     # Prepare cameras
+    if azimuth_deg is None:
+        azimuth_deg = [0, 45, 90, 180, 270, 315]
     cameras = get_orthogonal_camera(
-        elevation_deg=[0, 0, 0, 0, 0, 0],
+        elevation_deg=[0] * num_views,
         distance=[1.8] * num_views,
         left=-0.55,
         right=0.55,
         bottom=-0.55,
         top=0.55,
-        azimuth_deg=[x - 90 for x in [0, 45, 90, 180, 270, 315]],
+        azimuth_deg=[x - 90 for x in azimuth_deg],
         device=device,
     )
 
@@ -191,10 +194,13 @@ if __name__ == "__main__":
     parser.add_argument("--scheduler", type=str, default=None)
     parser.add_argument("--lora_model", type=str, default=None)
     parser.add_argument("--adapter_path", type=str, default="huanngzh/mv-adapter")
-    parser.add_argument("--num_views", type=int, default=6)
     # Device
     parser.add_argument("--device", type=str, default="cuda")
     # Inference
+    parser.add_argument("--num_views", type=int, default=6)  # not used
+    parser.add_argument(
+        "--azimuth_deg", type=int, nargs="+", default=[0, 45, 90, 180, 270, 315]
+    )
     parser.add_argument("--image", type=str, required=True)
     parser.add_argument("--text", type=str, default="high quality")
     parser.add_argument("--num_inference_steps", type=int, default=50)
@@ -212,6 +218,8 @@ if __name__ == "__main__":
     parser.add_argument("--remove_bg", action="store_true", help="Remove background")
     args = parser.parse_args()
 
+    num_views = len(args.azimuth_deg)
+
     pipe = prepare_pipeline(
         base_model=args.base_model,
         vae_model=args.vae_model,
@@ -219,7 +227,7 @@ if __name__ == "__main__":
         lora_model=args.lora_model,
         adapter_path=args.adapter_path,
         scheduler=args.scheduler,
-        num_views=args.num_views,
+        num_views=num_views,
         device=args.device,
         dtype=torch.float16,
     )
@@ -242,7 +250,7 @@ if __name__ == "__main__":
 
     images, reference_image = run_pipeline(
         pipe,
-        num_views=args.num_views,
+        num_views=num_views,
         text=args.text,
         image=args.image,
         height=768,
@@ -255,6 +263,7 @@ if __name__ == "__main__":
         negative_prompt=args.negative_prompt,
         device=args.device,
         remove_bg_fn=remove_bg_fn,
+        azimuth_deg=args.azimuth_deg,
     )
     make_image_grid(images, rows=1).save(args.output)
     reference_image.save(args.output.rsplit(".", 1)[0] + "_reference.png")

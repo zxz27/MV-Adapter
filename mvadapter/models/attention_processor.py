@@ -159,6 +159,7 @@ class DecoupledMVRowSelfAttnProcessor2_0(torch.nn.Module):
         cache_hidden_states: Optional[List[torch.FloatTensor]] = None,
         use_mv: bool = True,
         use_ref: bool = True,
+        num_views: Optional[int] = None,
         *args,
         **kwargs,
     ) -> torch.FloatTensor:
@@ -173,6 +174,9 @@ class DecoupledMVRowSelfAttnProcessor2_0(torch.nn.Module):
         if len(args) > 0 or kwargs.get("scale", None) is not None:
             deprecation_message = "The `scale` argument is deprecated and will be ignored. Please remove it, as passing it will raise an error in the future. `scale` should directly be passed while calling the underlying pipeline component i.e., via `cross_attention_kwargs`."
             deprecate("scale", "1.0.0", deprecation_message)
+
+        if num_views is not None:
+            self.num_views = num_views
 
         # NEW: cache hidden states for reference unet
         if cache_hidden_states is not None:

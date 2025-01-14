@@ -1,3 +1,4 @@
+controlnet_aux
 diffusers==0.31.0
 transformers==4.46.3
 peft
